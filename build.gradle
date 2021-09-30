@@ -2,7 +2,7 @@
 
 subprojects {
     ext {
-        artifactVersion = '2.7.0'
+        artifactVersion = '2.8.0-bolt'
     }
 }
 
