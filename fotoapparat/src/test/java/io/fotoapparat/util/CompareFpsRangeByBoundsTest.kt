@@ -18,7 +18,7 @@ class CompareFpsRangeByBoundsTest {
         )
 
         // When
-        val maxRange = fpsRangesList.maxWith(CompareFpsRangeByBounds)
+        val maxRange = fpsRangesList.maxWithOrNull(CompareFpsRangeByBounds)
 
         // Then
         assertEquals(
@@ -39,7 +39,7 @@ class CompareFpsRangeByBoundsTest {
         )
 
         // When
-        val minRange = fpsRangesList.minWith(CompareFpsRangeByBounds)
+        val minRange = fpsRangesList.minWithOrNull(CompareFpsRangeByBounds)
 
         // Then
         assertEquals(

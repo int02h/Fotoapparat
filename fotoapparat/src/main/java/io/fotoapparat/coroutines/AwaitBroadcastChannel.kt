@@ -1,5 +1,6 @@
 package io.fotoapparat.coroutines
 
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.channels.BroadcastChannel
@@ -31,7 +32,22 @@ internal class AwaitBroadcastChannel<T>(
         channel.send(element)
     }
 
+    @Deprecated(level = DeprecationLevel.HIDDEN, message = "Since 1.2.0, binary compatibility with versions <= 1.1.x")
     override fun cancel(cause: Throwable?): Boolean {
-        return channel.cancel(cause) && deferred.cancel(cause)
+        cancelInternal(cause)
+        return true
     }
+
+    override fun cancel(cause: CancellationException?) {
+        cancelInternal(cause)
+    }
+
+    private fun cancelInternal(cause: Throwable?) {
+        val exception = cause?.toCancellationException()
+        channel.cancel(exception)
+        deferred.cancel(exception)
+    }
+
+    private fun Throwable.toCancellationException(message: String? = null): CancellationException =
+            this as? CancellationException ?: CancellationException(message, this)
 }

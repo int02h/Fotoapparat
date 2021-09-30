@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 
 group = 'io.fotoapparat'
@@ -37,5 +36,3 @@ ext {
 
     libraryDescription = 'RxJava2 adapter for Fotoapparat.'
 }
-
-apply from: '../../deploy.gradle'
